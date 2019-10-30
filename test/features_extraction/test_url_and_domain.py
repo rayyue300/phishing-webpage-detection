@@ -8,5 +8,11 @@ class IsDomainHavingNonAsciiTest(unittest.TestCase):
     def testChinese(self):
         self.assertTrue(url_and_domain.isDomainHavingNonAscii('中文.com'))
 
+class IsShortUrlTest(unittest.TestCase):
+    def testGoogle(self):
+        self.assertFalse(url_and_domain.isShortUrl('https://google.com'))
+    def testBitly(self):
+        self.assertTrue(url_and_domain.isShortUrl('https://bit.ly/2WsVM75'))
+
 if __name__ == '__main__':
     unittest.main()
