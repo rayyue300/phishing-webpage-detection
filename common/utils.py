@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 
 def isAscii(s: str) -> bool:
-    """Return True if s contains ASCII characters only."""
+    """Return True if s contains ASCII characters only"""
     try:
         s.encode('ascii')
         return True
