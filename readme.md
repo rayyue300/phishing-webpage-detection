@@ -8,8 +8,19 @@ Working in progress, early stage.
 1. Visual Studio Code
 1. Mac OS Mojave
 
-## Test
-In the project root directory, execute
+## Milestones
+### Functions for Features Extraction
+#### URL and Domain based
+1. Does the domain contain non-ASCII characters?
+1. Does the URL using an URL shortening service?
+
+### Generate Data Set
+
+### Machine Learning
+
+## Unit Tests
+Unit tests are written to test specific modules / functions.
+To execute tests, go to the project root directory and execute
 ```bash
 python3 -m unittest
 ```
