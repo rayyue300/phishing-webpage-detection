@@ -4,9 +4,9 @@ from features_extraction import url_and_domain
 
 class IsDomainHavingNonAsciiTest(unittest.TestCase):
     def testGoogle(self):
-        self.assertFalse(url_and_domain.isDomainHavingNonAscii('google.com'))
+        self.assertFalse(url_and_domain.isDomainHavingNonAscii('https://google.com'))
     def testChinese(self):
-        self.assertTrue(url_and_domain.isDomainHavingNonAscii('中文.com'))
+        self.assertTrue(url_and_domain.isDomainHavingNonAscii('https://中文.com'))
 
 class IsShortUrlTest(unittest.TestCase):
     def testGoogle(self):
