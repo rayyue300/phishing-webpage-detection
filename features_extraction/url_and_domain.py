@@ -25,8 +25,8 @@ def isShortUrl(url: str) -> bool:
 
 def isDeepLevelSubdomain(url: str) -> int:
     """
-    Return True if the domain of the given url has deep level of subdomain
-    e.g. abcbank.com.somedomain.com
+    Return the no. of levels of subdomain of the given url
+    e.g. abcbank.com.somedomain.com returns 2
     """
     domain = utils.getDomainFromUrl(url)
     return utils.getSubdomainFromDomain(domain).count('.')+1
