@@ -22,3 +22,11 @@ def isShortUrl(url: str) -> bool:
                 r"prettylinkpro\.com|scrnch\.me|filoops\.info|vzturl\.com|qr\.net|1url\.com|tweez\.me|v\.gd|" \
                 r"tr\.im|link\.zip\.net"
     return re.search(shortUrlList, url)
+
+def isDeepLevelSubdomain(url: str) -> int:
+    """
+    Return True if the domain of the given url has deep level of subdomain
+    e.g. abcbank.com.somedomain.com
+    """
+    domain = utils.getDomainFromUrl(url)
+    return utils.getSubdomainFromDomain(domain).count('.')+1

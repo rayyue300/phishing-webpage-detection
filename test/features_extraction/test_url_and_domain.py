@@ -14,5 +14,11 @@ class IsShortUrlTest(unittest.TestCase):
     def testBitly(self):
         self.assertTrue(url_and_domain.isShortUrl('https://bit.ly/2WsVM75'))
 
+class IsDeepLevelSubdomain(unittest.TestCase):
+    def test1dot(self):
+        self.assertEqual(url_and_domain.isDeepLevelSubdomain('https://a.b.com'), 1)
+    def test2dot(self):
+        self.assertEqual(url_and_domain.isDeepLevelSubdomain('https://a.b.c.com/abc.def/'), 2)
+
 if __name__ == '__main__':
     unittest.main()
