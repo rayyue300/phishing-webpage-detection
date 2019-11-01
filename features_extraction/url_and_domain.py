@@ -4,13 +4,13 @@ import re
 
 from common import utils
 
-def isDomainHavingNonAscii(url: str) -> bool:
-    """Return True if the domain of the given url contains ASCII characters only"""
+def isDomainHavingNonAscii(url: str) -> int:
+    """Return 1 if the domain of the given url contains ASCII characters only"""
     domain = utils.getDomainFromUrl(url)
-    return not utils.isAscii(domain)
+    return 1 if not utils.isAscii(domain) else 0
 
-def isShortUrl(url: str) -> bool:
-    """Return True if the given url is a short URL"""
+def isShortUrl(url: str) -> int:
+    """Return 1 if the given url is a short URL"""
     # Reference of the list:
     # https://github.com/philomathic-guy/Malicious-Web-Content-Detection-Using-Machine-Learning/blob/master/patterns.py
     shortUrlList = r"bit\.ly|goo\.gl|shorte\.st|go2l\.ink|x\.co|ow\.ly|t\.co|tinyurl|tr\.im|is\.gd|cli\.gs|" \
@@ -21,7 +21,7 @@ def isShortUrl(url: str) -> bool:
                 r"po\.st|bc\.vc|twitthis\.com|u\.to|j\.mp|buzurl\.com|cutt\.us|u\.bb|yourls\.org|x\.co|" \
                 r"prettylinkpro\.com|scrnch\.me|filoops\.info|vzturl\.com|qr\.net|1url\.com|tweez\.me|v\.gd|" \
                 r"tr\.im|link\.zip\.net"
-    return re.search(shortUrlList, url)
+    return 1 if re.search(shortUrlList, url) else 0
 
 def isDeepLevelSubdomain(url: str) -> int:
     """
