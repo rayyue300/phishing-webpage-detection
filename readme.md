@@ -1,4 +1,5 @@
 # Phishing Webpage Detection
+[![Build Status](https://travis-ci.org/rayyue300/phishing-webpage-detection.svg?branch=master)](https://travis-ci.org/rayyue300/phishing-webpage-detection)
 
 This project makes use of machine learning to detect phishing webpage.
 Working in progress, early stage.
