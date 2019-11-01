@@ -14,6 +14,7 @@ Working in progress, early stage.
 #### URL and Domain based
 1. Does the domain contain non-ASCII characters?
 1. Does the URL using an URL shortening service?
+1. Does the URL have deep level of subdomain?
 
 ### Generate Data Set
 
