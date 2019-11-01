@@ -4,8 +4,9 @@ import re
 
 from common import utils
 
-def isDomainHavingNonAscii(domain: str) -> bool:
-    """Return True if the given domain contains ASCII characters only"""
+def isDomainHavingNonAscii(url: str) -> bool:
+    """Return True if the domain of the given url contains ASCII characters only"""
+    domain = utils.getDomainFromUrl(url)
     return not utils.isAscii(domain)
 
 def isShortUrl(url: str) -> bool:
