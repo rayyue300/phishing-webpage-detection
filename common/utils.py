@@ -1,5 +1,6 @@
 from urllib.parse import urlparse
 import tldextract
+from urllib.request import urlopen
 
 def isAscii(s: str) -> bool:
     """Return True if s contains ASCII characters only"""
@@ -20,3 +21,8 @@ def getSubdomainFromDomain(d: str) -> str:
     """
     return tldextract.extract(d).subdomain
     
+def getHttpResponse(u: str) -> str:
+    """
+    Return the HTTP response of the given url
+    """
+    return urlopen(u).read()
