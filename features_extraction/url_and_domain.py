@@ -1,6 +1,7 @@
 # This file is responsible to extract URL and domain based features from the given URL.
 
 import re
+from bs4 import BeautifulSoup
 
 from common import utils
 
@@ -30,3 +31,17 @@ def isDeepLevelSubdomain(url: str) -> int:
     """
     domain = utils.getDomainFromUrl(url)
     return utils.getSubdomainFromDomain(domain).count('.')+1
+
+def isLowAlexaRank(url: str) -> int:
+    """
+    Return the Alexa rank number of the given url
+    e.g. google.com returns 1
+    """
+    # The API is the one used in the Alexa toolbar
+    APIURL = "http://data.alexa.com/data?cli=10&dat=s&url="
+    try:
+        apiResult = utils.getHttpResponse(APIURL+url)
+        rank = int(BeautifulSoup(apiResult, "xml").find("REACH")['RANK'])
+    except TypeError:
+        return -1
+    return rank
