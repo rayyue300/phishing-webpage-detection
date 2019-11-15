@@ -26,5 +26,11 @@ class IsLowAlexaRankTest(unittest.TestCase):
     def testYoutube(self):
         self.assertEqual(url_and_domain.isLowAlexaRank('https://youtube.com'), 2)
 
+class IsNotIndexedByGoogle(unittest.TestCase):
+    def testGithub(self):
+        self.assertEqual(url_and_domain.isNotIndexedByGoogle('https://github.com'), -1)
+    def testOthers(self):
+        self.assertEqual(url_and_domain.isNotIndexedByGoogle('https://somethingdoesnotexist.com'), 1)
+
 if __name__ == '__main__':
     unittest.main()

@@ -2,6 +2,7 @@
 
 import re
 from bs4 import BeautifulSoup
+from googlesearch import search
 
 from common import utils
 
@@ -45,3 +46,29 @@ def isLowAlexaRank(url: str) -> int:
     except TypeError:
         return -1
     return rank
+
+def isNotIndexedByGoogle(url: str) -> int:
+    """
+    Return 1 if searching 'site:url' in Google returns NO results
+    Return 0 if there are results but the domains are not matched
+    Return -1 if there are results and the domains are matched
+
+    Remarks: 
+    This feature is not accurate because it's using domain instead of url.
+    The url from google may have slight difference with the given url.
+    (e.g. 'https://abc.com/' VS 'https://www.abc.com')
+    """
+    domain = utils.getDomainFromUrl(url)
+    results = search(query="site:"+domain, stop=5)
+    
+    noOfResults = 0
+
+    for result in results:
+        noOfResults += 1
+        if utils.getDomainFromUrl(str(result))==domain:
+            return -1
+    
+    if noOfResults == 0:
+        return 1
+
+    return 0
