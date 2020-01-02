@@ -1,7 +1,17 @@
 # This file is responsible to extract code based features from the given URL
 
+import re
 from bs4 import BeautifulSoup
 from common import utils
+
+def compileList(soup: str, tag: str, attr: str) -> []:
+    outputList = []
+    for x in soup.findAll(tag):
+        try:
+            outputList.append(x[attr])
+        except KeyError:
+            pass
+    return outputList
 
 def isHavingManyRedirections(url: str) -> int:
     return 0
@@ -13,15 +23,6 @@ def isUsingManyExternalResources(url: str) -> int:
     source = utils.getLoadedHtmlFromUrl(url)
     soup = BeautifulSoup(source, 'html.parser')
     domain = utils.getDomainFromUrl(url)
-
-    def compileList(soup: str, tag: str, attr: str) -> []:
-        outputList = []
-        for x in soup.findAll(tag):
-            try:
-                outputList.append(x[attr])
-            except KeyError:
-                pass
-        return outputList
 
     imageSources = compileList(soup, 'img', 'src')
     scriptSources = compileList(soup, 'script', 'src')
@@ -45,7 +46,34 @@ def isUsingManyExternalResources(url: str) -> int:
     else:
         return 0
 
-def isHavingPopupWindow(url: str) -> int:
+def isOpenningNewWindow(url: str) -> int:
+    hasNewWindow = False
+
+    source = utils.getLoadedHtmlFromUrl(url)
+    soup = BeautifulSoup(source, 'html.parser')
+
+    scriptSources = compileList(soup, 'script', 'src')
+    scriptInners = compileList(soup, 'script', 'innerHtml')
+    anchorTargets = compileList(soup, 'a', 'target')
+
+    for s in scriptSources:
+        try:
+            script = utils.getHttpResponse(s)
+            if re.match('window.open', script):
+                hasNewWindow = True
+        except:
+            pass
+
+    for i in scriptInners:
+        if re.match('window.open', str(i)):
+            hasNewWindow = True
+
+    for a in anchorTargets:
+        if a=='_blank':
+            hasNewWindow = True
+
+    if hasNewWindow:
+        return 1
     return 0
 
 def isBlockingRightClick(url: str) -> int:

@@ -21,7 +21,7 @@ Working in progress, early stage.
 #### Code based (In Progress)
 1. Does the URL have many redirections?
 1. Does the URL use many external resources?
-1. Does the URL have popup windows?
+1. Does the URL open new windows?
 1. Does the URL block right clicks?
 1. Does the URL use inception bar? [Ref](https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/)
 
