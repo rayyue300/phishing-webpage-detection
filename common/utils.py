@@ -1,6 +1,7 @@
 from urllib.parse import urlparse
 import tldextract
 from urllib.request import urlopen
+from selenium import webdriver
 
 def isAscii(s: str) -> bool:
     """Return True if s contains ASCII characters only"""
@@ -26,3 +27,16 @@ def getHttpResponse(u: str) -> str:
     Return the HTTP response of the given url
     """
     return urlopen(u).read()
+
+def getLoadedHtmlFromUrl(u: str) -> str:
+    """
+    Return HTML content of the given url after the page being loaded
+    """
+    driver = webdriver.Firefox()
+    driver.get(u)
+    driver.implicitly_wait(30)
+    source = driver.page_source
+    driver.quit()
+    return source
+
+#print (getLoadedHtmlFromUrl('https://google.com'))

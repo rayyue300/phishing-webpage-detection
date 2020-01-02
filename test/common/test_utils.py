@@ -16,7 +16,7 @@ class GetDomainFromUrlTest(unittest.TestCase):
     def testDomainWithDirectory(self):
         self.assertEqual(utils.getDomainFromUrl('https://github.com/rayyue300/phishing-webpage-detection'), 'github.com')
 
-class GetSubdomainFromDomain(unittest.TestCase):
+class GetSubdomainFromDomainTest(unittest.TestCase):
     def test1leveldotcom(self):
         self.assertEqual(utils.getSubdomainFromDomain('a.b.com'), 'a')
     def test1leveldotcomdothk(self):
@@ -25,6 +25,10 @@ class GetSubdomainFromDomain(unittest.TestCase):
         self.assertEqual(utils.getSubdomainFromDomain('a.b.c.com'), 'a.b')
     def test2leveldotcomdothk(self):
         self.assertEqual(utils.getSubdomainFromDomain('a.b.c.com.hk'), 'a.b')
+
+class GetLoadedHtmlFromUrlTest(unittest.TestCase):
+    def testHelloWorldCodepen(self):
+        self.assertTrue("Hello World" in utils.getLoadedHtmlFromUrl('https://cdpn.io/rayyue300/fullpage/RwNLBpa'))
 
 if __name__ == '__main__':
     unittest.main()
