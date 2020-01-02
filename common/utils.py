@@ -2,6 +2,7 @@ from urllib.parse import urlparse
 import tldextract
 from urllib.request import urlopen
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
 def isAscii(s: str) -> bool:
     """Return True if s contains ASCII characters only"""
@@ -32,7 +33,10 @@ def getLoadedHtmlFromUrl(u: str) -> str:
     """
     Return HTML content of the given url after the page being loaded
     """
-    driver = webdriver.Firefox()
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(options=options)
     driver.get(u)
     driver.implicitly_wait(30)
     source = driver.page_source
