@@ -111,3 +111,6 @@ dmypy.json
 
 # Ignore VS Code Settings
 .vscode/
+
+# Ignore geckodriver log
+geckodriver.log
