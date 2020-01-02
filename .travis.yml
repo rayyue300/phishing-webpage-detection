@@ -1,6 +1,8 @@
 language: python
 python:
   - "3.6"      # current default Python on Travis CI
+addons:
+  firefox: "71.0"
 # command to install dependencies
 install:
   - pip install -r requirements.txt
