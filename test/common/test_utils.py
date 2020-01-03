@@ -26,6 +26,16 @@ class GetSubdomainFromDomainTest(unittest.TestCase):
     def test2leveldotcomdothk(self):
         self.assertEqual(utils.getSubdomainFromDomain('a.b.c.com.hk'), 'a.b')
 
+class GetDomainAndSuffixFromUrlTest(unittest.TestCase):
+    def test1leveldotcom(self):
+        self.assertEqual(utils.getDomainAndSuffixFromUrl('a.b.com'), 'b.com')
+    def test1leveldotcomdothk(self):
+        self.assertEqual(utils.getDomainAndSuffixFromUrl('a.b.com.hk'), 'b.com.hk')
+    def test2leveldotcom(self):
+        self.assertEqual(utils.getDomainAndSuffixFromUrl('a.b.c.com'), 'c.com')
+    def test2leveldotcomdothk(self):
+        self.assertEqual(utils.getDomainAndSuffixFromUrl('a.b.c.com.hk'), 'c.com.hk')
+
 class GetLoadedHtmlFromUrlTest(unittest.TestCase):
     def testHelloWorldCodepen(self):
         self.assertTrue("Hello World" in utils.getLoadedHtmlFromUrl('https://cdpn.io/rayyue300/fullpage/RwNLBpa'))

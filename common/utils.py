@@ -1,6 +1,7 @@
 from urllib.parse import urlparse
-import tldextract
 from urllib.request import urlopen
+from time import sleep
+import tldextract
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
@@ -22,6 +23,14 @@ def getSubdomainFromDomain(d: str) -> str:
     e.g. a.b.c.com returns a.b
     """
     return tldextract.extract(d).subdomain
+
+def getDomainAndSuffixFromUrl(u: str) -> str:
+    """
+    Return the domain and the suffix of the given domain
+    e.g. http://www.worldbank.org.kg/ returns worldbank.org.kg
+    """
+    ext = tldextract.extract(u)
+    return ext.domain + '.' + ext.suffix
     
 def getHttpResponse(u: str) -> str:
     """
@@ -43,4 +52,19 @@ def getLoadedHtmlFromUrl(u: str) -> str:
     driver.quit()
     return source
 
+def getFinalDestinationUrl(u: str, t: int = 10) -> str:
+    """
+    Return the final destination url after redirections
+    Params: u for url and t for timeout(seconds)
+    """
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(options=options)
+    driver.get(u)
+    sleep(t)
+
+    destination = driver.current_url
+    driver.quit()
+    return destination
 #print (getLoadedHtmlFromUrl('https://google.com'))
