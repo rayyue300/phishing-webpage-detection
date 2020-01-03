@@ -2,11 +2,17 @@ import unittest
 
 from features_extraction import code
 
-class IsHavingManyRedirectionsTest(unittest.TestCase):
+class IsUsingManyExternalResourcesTest(unittest.TestCase):
     def testGoogle(self):
         self.assertEqual(code.isUsingManyExternalResources('https://google.com'), 0)
     def testGithub(self):
         self.assertEqual(code.isUsingManyExternalResources('https://github.com'), 1)
+
+class IsRedirectingToOtherDomainTest(unittest.TestCase):
+    def testGoogle(self):
+        self.assertEqual(code.isRedirectingToOtherDomain('https://google.com'), 0)
+    def testGooGl(self):
+        self.assertEqual(code.isRedirectingToOtherDomain('https://goo.gl'), 1)
 
 class IsOpeningNewWindowTest(unittest.TestCase):
     def testGoogle(self):

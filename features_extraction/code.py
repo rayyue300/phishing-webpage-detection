@@ -13,7 +13,12 @@ def compileList(soup: str, tag: str, attr: str) -> []:
             pass
     return outputList
 
-def isHavingManyRedirections(url: str) -> int:
+def isRedirectingToOtherDomain(url: str) -> int:
+    domainOriginal = utils.getDomainAndSuffixFromUrl(url)
+    urlAfter = utils.getFinalDestinationUrl(url)
+    domainAfter = utils.getDomainAndSuffixFromUrl(urlAfter)
+    if domainOriginal != domainAfter:
+        return 1
     return 0
 
 def isUsingManyExternalResources(url: str) -> int:

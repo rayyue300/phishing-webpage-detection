@@ -19,7 +19,7 @@ Working in progress, early stage.
 1. Is the domain not indexed by Google?
 
 #### Code based (In Progress)
-1. Does the URL have many redirections?
+1. Is the URL redirecting to other domain?
 1. Does the URL use many external resources?
 1. Does the URL open new windows?
 1. Does the URL block right clicks?
