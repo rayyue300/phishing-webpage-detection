@@ -82,6 +82,36 @@ def isOpenningNewWindow(url: str) -> int:
     return 0
 
 def isBlockingRightClick(url: str) -> int:
+    isBlocking = False
+
+    source = utils.getLoadedHtmlFromUrl(url)
+    soup = BeautifulSoup(source, 'html.parser')
+
+    scriptSources = compileList(soup, 'script', 'src')
+    scriptInners = compileList(soup, 'script', 'innerHtml')
+
+    for s in scriptSources:
+        try:
+            script = utils.getHttpResponse(s)
+
+            # document.addEventListener('contextmenu', event => event.preventDefault());
+            if re.search('contextmenu', script) and re.search('preventDefault', script):
+                isBlocking = True
+        except:
+            pass
+
+    for i in scriptInners:
+        if re.search('contextmenu', str(i)) and re.search('preventDefault', str(i)):
+            isBlocking = True
+    
+    # <body oncontextmenu="return false;"
+    if re.search('oncontextmenu', source):
+        isBlocking = True
+    if soup.body.oncontextmenu and re.search('return\sfalse', soup.body.oncontextmenu):
+        isBlocking = True
+
+    if isBlocking:
+        return 1
     return 0
 
 def isUsingInceptionBar(int: str) -> int:

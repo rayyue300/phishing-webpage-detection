@@ -27,6 +27,13 @@ class IsOpeningNewWindowTest(unittest.TestCase):
     def testAnchor(self):
         self.assertEqual(code.isOpenningNewWindow('https://cdpn.io/rayyue300/fullpage/yLyPBEb') ,1)
 
+class IsBlockingRightClickTest(unittest.TestCase):
+    def testGoogle(self):
+        self.assertEqual(code.isBlockingRightClick('https://google.com'), 0)
+    def testJs(self):
+        self.assertEqual(code.isBlockingRightClick('https://rayyue300.github.io/phishing-webpage-detection-test-resources/BlockRightClickByBody.html'), 1)
+    def testBody(self):
+        self.assertEqual(code.isBlockingRightClick('https://cdpn.io/rayyue300/fullpage/wvBPbdL'), 1)
 
 if __name__ == '__main__':
     unittest.main()
