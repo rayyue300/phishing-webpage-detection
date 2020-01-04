@@ -67,4 +67,3 @@ def getFinalDestinationUrl(u: str, t: int = 10) -> str:
     destination = driver.current_url
     driver.quit()
     return destination
-#print (getLoadedHtmlFromUrl('https://google.com'))
