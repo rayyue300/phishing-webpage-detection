@@ -4,13 +4,16 @@ import re
 from bs4 import BeautifulSoup
 from common import utils
 
-def compileList(soup: str, tag: str, attr: str) -> []:
+def compileList(soup: str, tag: str, attr: str = "") -> []:
     outputList = []
     for x in soup.findAll(tag):
-        try:
-            outputList.append(x[attr])
-        except KeyError:
-            pass
+        if attr!="":
+            try:
+                outputList.append(x[attr])
+            except KeyError:
+                pass
+        else:
+            outputList.append(x.text)
     return outputList
 
 def isRedirectingToOtherDomain(url: str) -> int:
@@ -88,27 +91,31 @@ def isBlockingRightClick(url: str) -> int:
     soup = BeautifulSoup(source, 'html.parser')
 
     scriptSources = compileList(soup, 'script', 'src')
-    scriptInners = compileList(soup, 'script', 'innerHtml')
+    scriptInners = compileList(soup, 'script')
 
+    # For external scripts
     for s in scriptSources:
         try:
+            # Download the script content
             script = utils.getHttpResponse(s)
 
-            # document.addEventListener('contextmenu', event => event.preventDefault());
+            # For document.addEventListener('contextmenu', event => event.preventDefault());
             if re.search('contextmenu', script) and re.search('preventDefault', script):
                 isBlocking = True
         except:
             pass
 
-    for i in scriptInners:
-        if re.search('contextmenu', str(i)) and re.search('preventDefault', str(i)):
+    # For checking <script>CONTENT</script>
+    for s in scriptInners:
+        if re.search('contextmenu', s) and re.search('preventDefault', s):
             isBlocking = True
-    
-    # <body oncontextmenu="return false;"
-    if re.search('oncontextmenu', source):
-        isBlocking = True
-    if soup.body.oncontextmenu and re.search('return\sfalse', soup.body.oncontextmenu):
-        isBlocking = True
+
+    # For checking body <body oncontextmenu="return false;"
+    try:
+        if soup.body['oncontextmenu'] and re.search('return\sfalse', soup.body['oncontextmenu']):
+            isBlocking = True
+    except KeyError:
+        pass
 
     if isBlocking:
         return 1
