@@ -136,6 +136,7 @@ def isUsingInceptionBar(url: str) -> int:
 
     # Load the page
     driver.get(url)
+    driver.implicitly_wait(30)
 
     # Get the count of div elements
     divs = driver.find_elements_by_tag_name('div')
