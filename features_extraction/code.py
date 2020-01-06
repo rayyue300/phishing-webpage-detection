@@ -4,6 +4,9 @@ import re
 from bs4 import BeautifulSoup
 from common import utils
 
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+
 def compileList(soup: str, tag: str, attr: str = "") -> []:
     outputList = []
     for x in soup.findAll(tag):
@@ -121,5 +124,30 @@ def isBlockingRightClick(url: str) -> int:
         return 1
     return 0
 
-def isUsingInceptionBar(int: str) -> int:
+def isUsingInceptionBar(url: str) -> int:
+    # About Inception Bar: https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(options=options)
+
+    # Set the initial size of the window
+    driver.set_window_size(500, 500)
+
+    # Load the page
+    driver.get(url)
+
+    # Get the count of div elements
+    divs = driver.find_elements_by_tag_name('div')
+    countBefore = len(divs)
+
+    # Resize the window
+    driver.set_window_size(500, 550)
+
+    # Get the count of div elements again
+    divs = driver.find_elements_by_tag_name('div')
+    countAfter = len(divs)
+
+    if countAfter > countBefore:
+        return 1
     return 0

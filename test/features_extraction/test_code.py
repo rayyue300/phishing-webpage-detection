@@ -35,5 +35,11 @@ class IsBlockingRightClickTest(unittest.TestCase):
     def testJs(self):
         self.assertEqual(code.isBlockingRightClick('https://rayyue300.github.io/phishing-webpage-detection-test-resources/BlockRightClickByJs.html'), 1)
 
+class IsUsingInceptionBarTest(unittest.TestCase):
+    def testWithInceptionBar(self):
+        self.assertEqual(code.isUsingInceptionBar('https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/'), 1)
+    def testGoogle(self):
+        self.assertEqual(code.isUsingInceptionBar('https://google.com/'), 0)
+
 if __name__ == '__main__':
     unittest.main()
