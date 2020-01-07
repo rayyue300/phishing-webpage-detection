@@ -18,17 +18,17 @@ Working in progress, early stage.
 1. Does the URL have low Alexa rank?
 1. Is the domain not indexed by Google?
 
-#### Code based (In Progress)
+#### Code based
 1. Is the URL redirecting to other domain?
 1. Does the URL use many external resources?
 1. Does the URL open new windows?
 1. Does the URL block right clicks?
-1. Does the URL use inception bar? [Ref](https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/)
+1. Does the URL use inception bar? ([Ref](https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/))
 
-#### Content based
+#### Content based (Future)
 
 
-### Generate Data Set
+### Generate Data Set (In Progress)
 
 ### Machine Learning
 
