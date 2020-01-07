@@ -1,5 +1,5 @@
 from urllib.parse import urlparse
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 from time import sleep
 import tldextract
 from selenium import webdriver
@@ -36,7 +36,7 @@ def getHttpResponse(u: str) -> str:
     """
     Return the HTTP response of the given url
     """
-    return urlopen(u).read()
+    return urlopen(Request(u, headers={'User-Agent': 'Mozilla'})).read()
 
 def getLoadedHtmlFromUrl(u: str) -> str:
     """
