@@ -162,6 +162,9 @@ def isUsingInceptionBar(url: str) -> int:
         divs = driver.find_elements_by_tag_name('div')
         countAfter = len(divs)
 
+        # Close browser
+        driver.quit()
+
         if countAfter > countBefore:
             return 1
         return 0
