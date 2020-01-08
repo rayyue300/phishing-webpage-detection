@@ -137,13 +137,12 @@ def isBlockingRightClick(url: str) -> int:
         return -1
 
 def isUsingInceptionBar(url: str) -> int:
+    # About Inception Bar: https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/
+    options = Options()
+    options.headless = True
+
+    driver = webdriver.Firefox(options=options)
     try:
-        # About Inception Bar: https://jameshfisher.com/2019/04/27/the-inception-bar-a-new-phishing-method/
-        options = Options()
-        options.headless = True
-
-        driver = webdriver.Firefox(options=options)
-
         # Set the initial size of the window
         driver.set_window_size(500, 500)
 
@@ -169,4 +168,5 @@ def isUsingInceptionBar(url: str) -> int:
             return 1
         return 0
     except:
+        driver.quit()
         return -1
