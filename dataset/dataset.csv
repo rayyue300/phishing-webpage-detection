@@ -1,6 +1,6 @@
 NonAsciiDomain,ShortURL,DeepSubdomain,LowAlexa,NoGoogleIndex,RedirectAway,ExternalRes,NewWindow,BlockRClick,InceptionBar,RESULT
 0,0,1,3770,1,0,0,0,0,0,1
-0,0,1,,,1,0,1,0,0,1
+0,0,1,-1,-1,1,0,1,0,0,1
 0,0,1,-1,-1,0,0,0,0,0,1
 0,0,1,-1,1,1,1,1,0,0,1
 0,0,1,-1,1,1,1,1,0,0,1
@@ -46,7 +46,7 @@ NonAsciiDomain,ShortURL,DeepSubdomain,LowAlexa,NoGoogleIndex,RedirectAway,Extern
 0,0,4,-1,1,-1,-1,-1,-1,-1,1
 0,0,4,-1,1,-1,-1,-1,-1,-1,1
 0,0,1,-1,1,1,0,0,0,0,1
-0,0,1,,,1,0,0,0,0,1
+0,0,1,-1,-1,1,0,0,0,0,1
 0,0,1,-1,1,1,0,0,0,0,1
 0,0,4,-1,1,-1,-1,-1,-1,-1,1
 0,0,4,-1,1,-1,-1,-1,-1,-1,1
@@ -177,7 +177,7 @@ NonAsciiDomain,ShortURL,DeepSubdomain,LowAlexa,NoGoogleIndex,RedirectAway,Extern
 0,0,1,97639,-1,0,0,1,0,0,0
 0,0,1,516373,-1,0,1,1,0,0,0
 0,0,1,516373,-1,0,0,0,0,0,0
-0,0,1,,,-1,-1,-1,-1,0,0
+0,0,1,-1,-1,-1,-1,-1,-1,0,0
 0,0,1,72,-1,0,0,0,0,0,0
 0,1,1,34889,-1,0,0,1,0,0,0
 0,0,1,39305,0,0,1,1,0,0,0
