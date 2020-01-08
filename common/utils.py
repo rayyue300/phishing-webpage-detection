@@ -46,9 +46,13 @@ def getLoadedHtmlFromUrl(u: str) -> str:
     options.headless = True
 
     driver = webdriver.Firefox(options=options)
-    driver.get(u)
-    driver.implicitly_wait(30)
-    source = driver.page_source
+    try:
+        driver.get(u)
+        driver.implicitly_wait(30)
+        source = driver.page_source
+    except:
+        driver.quit()
+        raise
     driver.quit()
     return source
 
@@ -61,8 +65,12 @@ def getFinalDestinationUrl(u: str, t: int = 10) -> str:
     options.headless = True
 
     driver = webdriver.Firefox(options=options)
-    driver.get(u)
-    sleep(t)
+    try:
+        driver.get(u)
+        sleep(t)
+    except:
+        driver.quit()
+        raise
 
     destination = driver.current_url
     driver.quit()
