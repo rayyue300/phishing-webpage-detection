@@ -114,3 +114,6 @@ dmypy.json
 
 # Ignore geckodriver log
 geckodriver.log
+
+
+.DS_Store
