@@ -5,9 +5,10 @@ This project makes use of machine learning to detect phishing webpage.
 Working in progress, early stage.
 
 ## Environment
+### Development
 1. Python 3.6
 1. Visual Studio Code
-1. Mac OS Mojave
+1. Mac OS Catalina
 
 ## Milestones
 ### Functions for Features Extraction
@@ -28,9 +29,33 @@ Working in progress, early stage.
 #### Content based (Future)
 
 
-### Generate Data Set (In Progress)
+### Generate Small Data Set
+#### Fetch URLs from PhishTank
+A script is written to fetch phish URLs and non-phish URLs.
+To execute it, go to the project root directory and execute
+```bash
+python3 fetch_data.py
+```
 
-### Machine Learning
+By default, it fetch 100 phish URLs and 100 non-phish URLs.
+This can be modified in the saveUrls() function.
+
+#### Extract Features and Generate Dataset
+> *Better execute in virtual machine* because it opens those phishing webpages.
+Another script is written to do the features extraction and generate the CSV file.
+To execute it, go to the project root directory and execute
+```bash
+python3 generate_dataset.py
+```
+
+### Simple Machine Learning (In Progress)
+At the current stage, the following algorithms are used for machine learning.
+* Logistic Regression
+* Decision Tree
+* Random Forest
+```bash
+python3 machine_learn.py
+```
 
 ## Unit Tests
 Unit tests are written to test specific modules / functions.
