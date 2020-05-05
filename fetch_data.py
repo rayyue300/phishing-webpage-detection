@@ -1,6 +1,7 @@
 # This file is for extracting online and valid phish from PhishTank
 
 import csv
+import time
 from bs4 import BeautifulSoup
 from common import utils
 
@@ -26,6 +27,8 @@ def getIds(no: int = 20, phish: bool = True, online: bool = True) -> list():
             anchorText = cell.find("a").get_text()
             ids.append(anchorText)
 
+        time.sleep(10)
+
     return ids
 
 def getUrl(id: str):
@@ -39,9 +42,14 @@ def getUrl(id: str):
     return b.get_text()
 
 def saveUrls():
-    phishIds = getIds(1000, True)
-    goodIds = getIds(1000, False)
+    print('Start Getting Phishing ID')
+    phishIds = getIds(40, True)
+    print('Done Getting Phishing ID')
+    print('Start Getting Good IDs')
+    goodIds = getIds(40, False)
+    print('Done Getting Good IDs')
 
+    print('Start Getting URLs')
     with open('dataset/urls.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         # Header
@@ -50,21 +58,29 @@ def saveUrls():
         #Phish
         countPhish = 0
         for i in phishIds:
-            if countPhish%10==0:
-                print('Fetching Phishing URL #'+str(countPhish))
             url = getUrl(i)
             writer.writerow([url, 1])
+            if countPhish%10==0:
+                print('Fetching Phishing URL #'+str(countPhish))
+            if countPhish%50==0:
+                print('Pausing 60 seconds.')
+                time.sleep(60)
+                print('Resumed')
             countPhish+=1
 
         #Safe
         countGood = 0
         for i in goodIds:
-            if countGood%10==0:
-                print('Fetching Good URL #'+str(countGood))
             url = getUrl(i)
             writer.writerow([url, 0])
+            if countGood%10==0:
+                print('Fetching Good URL #'+str(countGood))
+            if countGood%50==0:
+                print('Pausing 60 seconds.')
+                time.sleep(60)
+                print('Resumed')
             countGood+=1
-
+    print('Done Getting URLs')
 
 #print("ID: 6347670")
 #print(getUrl("6347670"))
