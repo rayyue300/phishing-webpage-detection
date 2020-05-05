@@ -27,7 +27,8 @@ def getIds(no: int = 20, phish: bool = True, online: bool = True) -> list():
             anchorText = cell.find("a").get_text()
             ids.append(anchorText)
 
-        time.sleep(10)
+        #time.sleep(10)
+        print('- Fetching Page'+str(i))
 
     return ids
 
@@ -41,47 +42,76 @@ def getUrl(id: str):
     b = span.find("b")
     return b.get_text()
 
-def saveUrls():
-    print('Start Getting Phishing ID')
-    phishIds = getIds(40, True)
-    print('Done Getting Phishing ID')
-    print('Start Getting Good IDs')
-    goodIds = getIds(40, False)
-    print('Done Getting Good IDs')
 
-    print('Start Getting URLs')
-    with open('dataset/urls.csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        # Header
-        writer.writerow(['url', 'result'])
 
-        #Phish
-        countPhish = 0
-        for i in phishIds:
-            url = getUrl(i)
-            writer.writerow([url, 1])
-            if countPhish%10==0:
-                print('Fetching Phishing URL #'+str(countPhish))
-            if countPhish%50==0:
-                print('Pausing 60 seconds.')
-                time.sleep(60)
-                print('Resumed')
-            countPhish+=1
+userinput = 0
+while userinput!='4':
+    print('Enter your choice:')
+    print('1. Fetch IDs')
+    print('2. Fetch Phish URLs')
+    print('3. Fetch Good URLs')
+    print('4. Quit')
+    userinput = input('Enter: ')
+    if userinput=='1':
+        with open('dataset/goodIds.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            # Header
+            writer.writerow(['id'])
+            goodIds = getIds(1000, False)
+            for i in goodIds:
+                writer.writerow([i])
+        with open('dataset/phishIds.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            # Header
+            writer.writerow(['id'])
+            phishIds = getIds(1000, True)
+            for i in phishIds:
+                writer.writerow([i])
 
-        #Safe
-        countGood = 0
-        for i in goodIds:
-            url = getUrl(i)
-            writer.writerow([url, 0])
-            if countGood%10==0:
-                print('Fetching Good URL #'+str(countGood))
-            if countGood%50==0:
-                print('Pausing 60 seconds.')
-                time.sleep(60)
-                print('Resumed')
-            countGood+=1
-    print('Done Getting URLs')
+    if userinput=='2':
+        # Read IDs
+        phishIds = []
+        with open('dataset/phishIds.csv', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for i in reader:
+                phishIds.append(i['id'])
+        # Get URL
+        with open('dataset/urls.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            # Header
+            #writer.writerow(['url', 'result'])
+            countPhish = 0
+            for i in phishIds:
+                url = getUrl(i)
+                writer.writerow([url, 1])
+                if countPhish%10==0:
+                    print('- Fetching Phishing URL #'+str(countPhish))
+                if countPhish%50==0:
+                    print('- Pausing 10 seconds.')
+                    time.sleep(10)
+                    print('- Resumed')
+                countPhish+=1
 
-#print("ID: 6347670")
-#print(getUrl("6347670"))
-saveUrls()
+    if userinput=='3':
+        # Read IDs
+        goodIds = []
+        with open('dataset/goodIds.csv', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for i in reader:
+                goodIds.append(i['id'])
+        # Get URL
+        with open('dataset/urls.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            # Header
+            #writer.writerow(['url', 'result'])
+            countGood = 0
+            for i in goodIds:
+                url = getUrl(i)
+                writer.writerow([url, 0])
+                if countGood%10==0:
+                    print('- Fetching Good URL #'+str(countGood))
+                if countGood%50==0:
+                    print('- Pausing 10 seconds.')
+                    time.sleep(10)
+                    print('- Resumed')
+                countGood+=1

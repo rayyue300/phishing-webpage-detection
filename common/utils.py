@@ -36,7 +36,7 @@ def getHttpResponse(u: str) -> str:
     """
     Return the HTTP response of the given url
     """
-    return urlopen(Request(u, headers={'User-Agent': 'Mozilla'})).read()
+    return urlopen(Request(u, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:73.0) Gecko/20100101 Firefox/73.0'})).read()
 
 def getLoadedHtmlFromUrl(u: str) -> str:
     """
