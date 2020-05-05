@@ -39,8 +39,8 @@ def getUrl(id: str):
     return b.get_text()
 
 def saveUrls():
-    phishIds = getIds(100, True)
-    goodIds = getIds(100, False)
+    phishIds = getIds(1000, True)
+    goodIds = getIds(1000, False)
 
     with open('dataset/urls.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
@@ -48,13 +48,22 @@ def saveUrls():
         writer.writerow(['url', 'result'])
 
         #Phish
+        countPhish = 0
         for i in phishIds:
+            if countPhish%10==0:
+                print('Fetching Phishing URL #'+str(countPhish))
             url = getUrl(i)
             writer.writerow([url, 1])
+            countPhish+=1
 
+        #Safe
+        countGood = 0
         for i in goodIds:
+            if countGood%10==0:
+                print('Fetching Good URL #'+str(countGood))
             url = getUrl(i)
             writer.writerow([url, 0])
+            countGood+=1
 
 
 #print("ID: 6347670")
