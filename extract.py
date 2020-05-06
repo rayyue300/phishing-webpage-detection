@@ -65,12 +65,12 @@ def showProgress():
     prevProgress = 0
     while progress<maxProgress:
         elapsedTime = time.time()-startTime
-        print('Elapsed Time: '+str(elapsedTime))
+        print('Elapsed Time: '+str(round(elapsedTime))+'s')
         if progress!=prevProgress:
             prevProgress = progress
             print('Extracted Features: '+str(progress)+'/'+str(maxProgress))
             #print(str(progress/maxProgress*100)+'%')
-        time.sleep(5)
+        time.sleep(10)
 
 # Add threads into the thread pool
 threads.append(threading.Thread(target=showProgress))
