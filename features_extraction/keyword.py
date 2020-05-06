@@ -21,8 +21,7 @@ def isPageContainingCreditCard(url: str) -> int:
     result1 = 'credit card' in source
     result2 = 'credit-card' in source
     result3 = 'Credit Card' in source
-    result4 = 'Credit card' in source
-    return 1 if (result1 or result2 or result3 or result4) else 0
+    return 1 if (result1 or result2 or result3) else 0
 
 def isPageContainingDownload(url: str) -> int:
     """Return 1 if the page contains 'download' in the page of the given URL"""
