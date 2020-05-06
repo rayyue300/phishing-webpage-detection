@@ -66,7 +66,9 @@ def showProgress():
     while progress<maxProgress:
         if progress!=prevProgress:
             prevProgress = progress
-            print('Extracted features: '+str(progress)+'/'+str(maxProgress))
+            print('Extracted Features: '+str(progress)+'/'+str(maxProgress))
+            elapsedTime = time.time()-startTime
+            print('Elapsed Time: '+str(elapsedTime))
             #print(str(progress/maxProgress*100)+'%')
         time.sleep(5)
 
