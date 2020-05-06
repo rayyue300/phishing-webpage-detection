@@ -10,34 +10,39 @@ def isStringInPage(url: str, searchTarget: str) -> int:
 
 def isPageContainingLogin(url: str) -> int:
     """Return 1 if the page contains 'login' in the page of the given URL"""
-    resultSmallLetter = isStringInPage(url, 'login')
-    resultCapitalLetter = isStringInPage(url, 'Login')
-    return resultSmallLetter or resultCapitalLetter
+    source = utils.getLoadedHtmlFromUrl(url)
+    result1 = 'login' in source
+    result2 = 'Login' in source
+    return 1 if (result1 or result2) else 0
 
 def isPageContainingCreditCard(url: str) -> int:
     """Return 1 if the page contains 'credit card' in the page of the given URL"""
-    result1 = isStringInPage(url, 'credit card')
-    result2 = isStringInPage(url, 'credit-card')
-    result3 = isStringInPage(url, 'Credit Card')
-    result4 = isStringInPage(url, 'Credit card')
-    return result1 or result2 or result3 or result4
+    source = utils.getLoadedHtmlFromUrl(url)
+    result1 = 'credit card' in source
+    result2 = 'credit-card' in source
+    result3 = 'Credit Card' in source
+    result4 = 'Credit card' in source
+    return 1 if (result1 or result2 or result3 or result4) else 0
 
 def isPageContainingDownload(url: str) -> int:
     """Return 1 if the page contains 'download' in the page of the given URL"""
-    resultSmallLetter = isStringInPage(url, 'download')
-    resultCapitalLetter = isStringInPage(url, 'Download')
-    return resultSmallLetter or resultCapitalLetter
+    source = utils.getLoadedHtmlFromUrl(url)
+    result1 = 'download' in source
+    result2 = 'Download' in source
+    return 1 if (result1 or result2) else 0
 
 def isPageContainingUrgent(url: str) -> int:
     """Return 1 if the page contains 'urgent' in the page of the given URL"""
-    result1 = isStringInPage(url, 'urgent')
-    result2 = isStringInPage(url, 'Urgent')
-    result3 = isStringInPage(url, 'URGENT')
-    return result1 or result2 or result3
+    source = utils.getLoadedHtmlFromUrl(url)
+    result1 = 'urgent' in source
+    result2 = 'Urgent' in source
+    result3 = 'URGENT' in source
+    return 1 if (result1 or result2 or result3) else 0
 
 def isPageContainingActionRequired(url: str) -> int:
     """Return 1 if the page contains 'action required' in the page of the given URL"""
-    result1 = isStringInPage(url, 'action required')
-    result2 = isStringInPage(url, 'Action Required')
-    result3 = isStringInPage(url, 'ACTION REQUIRED')
-    return result1 or result2 or result3
+    source = utils.getLoadedHtmlFromUrl(url)
+    result1 = 'action required' in source
+    result2 = 'Action Required' in source
+    result3 = 'ACTION REQUIRED' in source
+    return 1 if (result1 or result2 or result3) else 0
