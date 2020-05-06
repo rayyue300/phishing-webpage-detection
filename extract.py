@@ -10,8 +10,8 @@ url = input('Enter the URL for feature extraction: ')
 
 # Initialize
 progress = 0            # store current no. of finished thread
-maxProgress = 15         # store total no. of threads to be executed
-startTime = 0           # store current time
+maxProgress = 15        # store total no. of threads to be executed
+startTime = time.time() # store current time
 threads = []            # store all the threads to be executed
 
 # Decalre variables to store features value
@@ -64,11 +64,11 @@ def showProgress():
     global progress
     prevProgress = 0
     while progress<maxProgress:
+        elapsedTime = time.time()-startTime
+        print('Elapsed Time: '+str(elapsedTime))
         if progress!=prevProgress:
             prevProgress = progress
             print('Extracted Features: '+str(progress)+'/'+str(maxProgress))
-            elapsedTime = time.time()-startTime
-            print('Elapsed Time: '+str(elapsedTime))
             #print(str(progress/maxProgress*100)+'%')
         time.sleep(5)
 
