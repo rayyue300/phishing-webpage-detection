@@ -4,6 +4,7 @@ import csv
 import threading
 from features_extraction import code
 from features_extraction import url_and_domain
+from features_extraction import keyword
 
 def generate():
     count = 0
@@ -24,6 +25,11 @@ def generate():
                 "NewWindow",
                 "BlockRClick",
                 "InceptionBar",
+                "Login",
+                "CreditCard",
+                "Download",
+                "Urgent",
+                "ActionRequired"
                 "RESULT"
             ])
 
@@ -57,9 +63,23 @@ def generate():
                         4: code.isUsingInceptionBar(url)
                     }
                     cFeatures[no] = switcher.get(no)
-                
                 for i in range(0,5):
                     threads.append(threading.Thread(target=jobCs, args=[i, url]))
+
+                # Keyword based
+                kFeatures = [None] * 5
+                def jobKs(no: int, url: str):
+                    switcher = {
+                        0: keyword.isPageContainingLogin(url),
+                        1: keyword.isPageContainingCreditCard(url),
+                        2: keyword.isPageContainingDownload(url),
+                        3: keyword.isPageContainingUrgent(url),
+                        4: keyword.isPageContainingActionRequired(url)
+                    }
+                    kFeatures[no] = switcher.get(no)
+                
+                for i in range(0,5):
+                    threads.append(threading.Thread(target=jobKs, args=[i, url]))
 
                 for t in threads:
                     t.start()
@@ -71,6 +91,8 @@ def generate():
                     results.append(u)
                 for c in cFeatures:
                     results.append(c)
+                for k in kFeatures:
+                    results.append(k)
 
                 count += 1
             except:
