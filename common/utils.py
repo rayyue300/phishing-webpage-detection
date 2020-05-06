@@ -56,7 +56,7 @@ def getLoadedHtmlFromUrl(u: str) -> str:
     driver.quit()
     return source
 
-def getFinalDestinationUrl(u: str, t: int = 10) -> str:
+def getFinalDestinationUrl(u: str, t: int = 5) -> str:
     """
     Return the final destination url after redirections
     Params: u for url and t for timeout(seconds)
