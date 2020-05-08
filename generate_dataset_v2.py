@@ -102,7 +102,8 @@ def jobOneRow(url: str, result: str):
         writer = csv.writer(dsfile)
         writer.writerow(results)
     progress+=1
-    print('Progress'+str(progress)+'/'+str(len(urlrows)))
+    print('Progress:\t'+str(progress)+'/'+str(len(urlrows)))
+    print('Elapsed time: \t'+str(round(time.time()-startTime)))
 
 
 
