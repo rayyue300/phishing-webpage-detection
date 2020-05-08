@@ -108,7 +108,7 @@ def jobOneRow(url: str, result: str):
 
 
 #for i in range(0, math.ceil(len(urlrows)/5), 5):
-for i in range(0, 10, 5):
+for i in range(0, 15, 5):
     threads = []
     for j in range(0, 5):
         threads.append(threading.Thread(target=jobOneRow, args=[urlrows[i+j]['url'],urlrows[i+j]['result']]))
