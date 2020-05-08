@@ -141,32 +141,35 @@ def isUsingInceptionBar(url: str) -> int:
     options = Options()
     options.headless = True
 
-    driver = webdriver.Firefox(options=options)
     try:
-        # Set the initial size of the window
-        driver.set_window_size(500, 500)
+        driver = webdriver.Firefox(options=options)
+        try:
+            # Set the initial size of the window
+            driver.set_window_size(500, 500)
 
-        # Load the page
-        driver.get(url)
-        driver.implicitly_wait(30)
+            # Load the page
+            driver.get(url)
+            driver.implicitly_wait(30)
 
-        # Get the count of div elements
-        divs = driver.find_elements_by_tag_name('div')
-        countBefore = len(divs)
+            # Get the count of div elements
+            divs = driver.find_elements_by_tag_name('div')
+            countBefore = len(divs)
 
-        # Resize the window
-        driver.set_window_size(500, 550)
+            # Resize the window
+            driver.set_window_size(500, 550)
 
-        # Get the count of div elements again
-        divs = driver.find_elements_by_tag_name('div')
-        countAfter = len(divs)
+            # Get the count of div elements again
+            divs = driver.find_elements_by_tag_name('div')
+            countAfter = len(divs)
 
-        # Close browser
-        driver.quit()
+            # Close browser
+            driver.quit()
 
-        if countAfter > countBefore:
-            return 1
-        return 0
+            if countAfter > countBefore:
+                return 1
+            return 0
+        except:
+            driver.quit()
+            return -1
     except:
-        driver.quit()
         return -1
