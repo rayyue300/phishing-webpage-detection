@@ -57,14 +57,14 @@ while userinput!='4':
             writer = csv.writer(csvfile)
             # Header
             writer.writerow(['id'])
-            goodIds = getIds(1000, False)
+            goodIds = getIds(500, False)
             for i in goodIds:
                 writer.writerow([i])
         with open('dataset/phishIds.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
             # Header
             writer.writerow(['id'])
-            phishIds = getIds(1000, True)
+            phishIds = getIds(500, True)
             for i in phishIds:
                 writer.writerow([i])
 
