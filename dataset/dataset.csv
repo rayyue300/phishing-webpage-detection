@@ -1,4 +1,4 @@
-NonAsciiDomain,ShortURL,DeepSubdomain,LowAlexa,NoGoogleIndex,RedirectAway,ExternalRes,NewWindow,BlockRClick,InceptionBar,Login,CreditCard,Download,Urgent,ActionRequiredRESULT
+NonAsciiDomain,ShortURL,DeepSubdomain,LowAlexa,NoGoogleIndex,RedirectAway,ExternalRes,NewWindow,BlockRClick,InceptionBar,Login,CreditCard,Download,Urgent,ActionRequired,RESULT
 0,0,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,1
 0,0,1,-1,-1,0,0,0,0,0,1,0,0,0,0,1
 0,0,1,-1,-1,0,0,1,0,0,1,0,0,0,0,1
