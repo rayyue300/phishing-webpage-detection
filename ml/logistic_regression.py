@@ -1,6 +1,7 @@
 # Start timer
 import time
-startTime = time.time()
+current_milli_time = lambda: int(round(time.time() * 1000))
+startTime = current_milli_time()
 
 
 
@@ -50,14 +51,19 @@ for name, model in modelsLogRegs:
 # Compare Algorithms
 plt.boxplot(resultsLogRegs, labels=namesLogRegs)
 plt.title('Logistic Regression')
-plt.show()
+#plt.show()
 
+
+
+# Print Training Time
+print('Training time: '+str(round(current_milli_time()-startTime))+'ms')
+startTime = current_milli_time()
 
 
 # Predictions on validation dataset using the “best” LR model
 from sklearn import metrics
-#optimalAlg = 'sag'
-optimalAlg = input('Input optimal algorithm: ')
+optimalAlg = 'sag'
+#optimalAlg = input('Input optimal algorithm: ')
 logReg = LogisticRegression(solver=str(optimalAlg), multi_class='ovr')
 logReg.fit(X_train,Y_train)
 predictions = logReg.predict(X_val)
@@ -73,5 +79,5 @@ joblib.dump(logReg, 'final_models/logistic_regression.pkl')
 
 
 
-# Print Elapsed Time
-print('Elapsed time: '+str(round(time.time()-startTime))+'s')
+# Print Testing Time
+print('Testing time: '+str(round(current_milli_time()-startTime))+'ms')

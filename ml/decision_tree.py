@@ -1,6 +1,7 @@
 # Start timer
 import time
-startTime = time.time()
+current_milli_time = lambda: int(round(time.time() * 1000))
+startTime = current_milli_time()
 
 
 
@@ -46,6 +47,12 @@ plt.savefig('tree_high_dpi', dpi=100)
 
 
 
+# Print Training Time
+print('Training time: '+str(round(current_milli_time()-startTime))+'ms')
+startTime = current_milli_time()
+
+
+
 # Model Evaluation
 from sklearn import metrics
 predictions = model.predict(X_val)
@@ -61,5 +68,5 @@ joblib.dump(model, 'final_models/decision_tree.pkl')
 
 
 
-# Print Elapsed Time
-print('Elapsed time: '+str(round(time.time()-startTime))+'s')
+# Print Testing Time
+print('Testing time: '+str(round(current_milli_time()-startTime))+'ms')

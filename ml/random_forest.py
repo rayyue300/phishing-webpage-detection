@@ -1,6 +1,7 @@
 # Start timer
 import time
-startTime = time.time()
+current_milli_time = lambda: int(round(time.time() * 1000))
+startTime = current_milli_time()
 
 
 
@@ -49,7 +50,13 @@ for name, model in modelsRF:
 # Compare Algorithms
 plt.boxplot(resultsRF, labels=namesRF)
 plt.title('Random Forest')
-plt.show()
+#plt.show()
+
+
+
+# Print Training Time
+print('Training time: '+str(round(current_milli_time()-startTime))+'ms')
+startTime = current_milli_time()
 
 
 
@@ -72,5 +79,5 @@ joblib.dump(model, 'final_models/random_forest.pkl')
 
 
 
-# Print Elapsed Time
-print('Elapsed time: '+str(round(time.time()-startTime))+'s')
+# Print Testing Time
+print('Testing time: '+str(round(current_milli_time()-startTime))+'ms')
