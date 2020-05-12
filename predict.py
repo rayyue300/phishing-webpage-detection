@@ -112,9 +112,10 @@ def main(argv):
     prediction = classifier.predict(results2D)
     elapsedTime = time.time()-predictStart
     print('- Elapsed Time: '+str(round(time.time()-predictStart))+'s\tDone')
-    if prediction[0]==0:
+    result = int(prediction[0])
+    if result==0:
         print('- NOT PHISHING')
-    elif prediction[0]==1:
+    elif result==1:
         print('- PHISHING')
     else:
         print('- ERROR')
