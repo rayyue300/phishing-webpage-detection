@@ -108,7 +108,8 @@ def main(argv):
     print('Predicting')
     classifier = joblib.load('final_models/decision_tree.pkl')
     predictStart = time.time()
-    results2D = np.reshape(results, (1, -1))
+    #results2D = np.reshape(results, (1, -1))
+    results2D = np.array(results).reshape((1, -1))
     prediction = classifier.predict(results2D)
     elapsedTime = time.time()-predictStart
     print('- Elapsed Time: '+str(round(time.time()-predictStart))+'s\tDone')
