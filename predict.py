@@ -114,7 +114,7 @@ def main(argv):
     print('- Elapsed Time: '+str(round(time.time()-predictStart))+'s\tDone')
     if prediction[0]==0:
         print('- NOT PHISHING')
-    elif prediction[1]==1:
+    elif prediction[0]==1:
         print('- PHISHING')
     else:
         print('- ERROR')
